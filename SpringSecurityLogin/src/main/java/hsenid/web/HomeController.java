@@ -32,6 +32,7 @@ public class HomeController {
         return "dba";
     }
 
+
     @RequestMapping(value = "/userPage", method = RequestMethod.GET)
     public String user(ModelMap model) {
         model.addAttribute("user", getPrincipal());
