@@ -3,10 +3,13 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>DBA page</title>
+    <title>Admin page</title>
 </head>
 <body>
-Dear <strong>${user}</strong>, Welcome to DBA Page.
+Dear <strong>${user}</strong>, Welcome to Admin Page.
+
+<a href="<c:url value="/translate" />">Translate</a>
+<br>
 <a href="<c:url value="/logout" />">Logout</a>
 </body>
 </html>
