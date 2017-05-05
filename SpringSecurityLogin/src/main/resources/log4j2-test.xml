@@ -3,7 +3,7 @@
     <properties>
         <!-- Format of the data written to log files. -->
         <property name="format">%d{yyyy-MMM-dd HH:mm:ss:sss} %p [%t] %c %m%n</property>
-        <property name="log_root">${env:CATALINA_HOME}/webapps/web-selfcare/logs</property>
+        <property name="log_root">${env:CATALINA_HOME}/webapps/SpringSecurityLogin/logs</property>
     </properties>
 
     <Appenders>
@@ -27,7 +27,7 @@
         </RollingRandomAccessFile>
 
         <!-- Create a log file to hold error/fatal log level details. -->
-        <RollingRandomAccessFile name="web-selfcare-error-log"
+        <RollingRandomAccessFile name="spring-security-login-error-log"
                                  fileName="${log_root}/Spring.security.error.log"
                                  filePattern="${log_root}/Spring.security.error.%d{yyyy-MM-dd}-%i.log">
             <PatternLayout>

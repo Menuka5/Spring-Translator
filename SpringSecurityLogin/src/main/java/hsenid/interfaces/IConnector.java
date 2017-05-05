@@ -1,8 +1,11 @@
 package hsenid.interfaces;
 
-/**
- * Created by hsenid on 5/5/17.
- */
+
+import org.json.simple.JSONObject;
+
 public interface IConnector {
+
+    public JSONObject getAllLanguagesList();
+
 }
 

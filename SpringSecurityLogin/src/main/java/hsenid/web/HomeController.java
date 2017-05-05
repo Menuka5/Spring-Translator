@@ -1,5 +1,7 @@
 package hsenid.web;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,8 +16,12 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class HomeController {
+
+    private static final Logger logger = LogManager.getLogger(HomeController.class);
+
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public String homePage(ModelMap model) {
+        logger.info("Home Test");
         model.addAttribute("greeting", "Hi, Welcome to mysite. ");
         return "welcome";
     }

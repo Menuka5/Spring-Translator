@@ -9,14 +9,14 @@
         $(document).ready(function(){
             $.ajax({
                 type: "GET",
-                url:"https://translate.yandex.net/api/v1.5/tr.json/getLangs?ui=en&key=trnsl.1.1.20160607T111835Z.f64d4276fb712ae3.ed0f150b6046b34df73301472d5e576d32fe3c8b",
+                url:"sendAllLanguages",
                 dataType: "json",
                 success: function (data) {
                     var $el = $("#Fromlangs");
                     var $tl = $("#Tolangs");
                     $el.empty();
                     $tl.empty();
-                    $.each(data.langs, function(value, key) {
+                    $.each(data, function(value, key) {
                         $el.append($("<option></option>").attr("value", value).text(key));
                         $tl.append($("<option></option>").attr("value", value).text(key));
                     });
