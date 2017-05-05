@@ -9,6 +9,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <abc.version>1.2.3</abc.version>
         <spring.version>4.3.8.RELEASE</spring.version>
         <testng.version>6.8</testng.version>
         <log4j.version>2.5</log4j.version>
@@ -16,7 +17,7 @@
     </properties>
 
     <modules>
-        <module>/SpringSecurityLogin</module>
+        <module>SpringSecurityLogin</module>
     </modules>
 
     <build>

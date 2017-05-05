@@ -16,12 +16,12 @@ public class TranslatorController {
         return "translate";
     }
 
-    @RequestMapping(value = "/getTranslate", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/getTranslate", method = RequestMethod.GET)
     @ResponseBody
     public String getTranslated(HttpServletRequest request){
         String from = (String)request.getAttribute("from");
         String to = (String)request.getAttribute("to");
         String text = (String)request.getAttribute("text");
         return text;
-    }
+    }*/
 }
