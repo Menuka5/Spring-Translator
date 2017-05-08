@@ -28,14 +28,20 @@
                 var fromLang =$("#Fromlangs").val();
                 var toLang =$("#Tolangs").val();
                 var textToTranslate =$("#textToTranslate").val();
+
                 $.ajax({
                     type: "GET",
-                    url:"https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160607T111835Z.f64d4276fb712ae3.ed0f150b6046b34df73301472d5e576d32fe3c8b&text="+textToTranslate+"&lang="+fromLang+"-"+toLang,
+                    url:"getTranslate",
+                    data: {
+                        fromLang: fromLang,
+                        toLang: toLang,
+                        text: textToTranslate
+                    },
                     dataType: "json",
                     success: function (reply) {
                         $("#translated").val("");
                         var input = $("#translated");
-                        input.val(input.val() + reply.text[0]);
+                        input.val(input.val() + reply.text);
                     }
                 });
 
