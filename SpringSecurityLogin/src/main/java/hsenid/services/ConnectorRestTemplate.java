@@ -47,8 +47,6 @@ public class ConnectorRestTemplate implements IConnector {
 
     public String getTranslate(String textToTranslate, String fromLanguage, String toLanguage){
 
-        //            String translatorReply = restTemplate.getForObject(modifiedUrlGenerator.modifiedUrl(textToTranslate, fromLanguage, toLanguage), String.class);
-//            JSONObject json = (JSONObject) parser.parse(translatorReply);
         sendTranslated = restTemplate.getForObject(modifiedUrlGenerator.modifiedUrl(textToTranslate, fromLanguage, toLanguage), String.class);
 
         logger.info(sendTranslated.toString());
