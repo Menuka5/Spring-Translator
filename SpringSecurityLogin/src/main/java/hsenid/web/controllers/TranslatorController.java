@@ -1,8 +1,7 @@
-package hsenid.web;
+package hsenid.web.controllers;
 
 import hsenid.services.ConnectorHttpClient;
 import hsenid.services.ConnectorRestTemplate;
-import hsenid.services.ModifiedUrlGenerator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -14,10 +13,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 @Controller

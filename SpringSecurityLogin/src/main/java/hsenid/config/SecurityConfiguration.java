@@ -27,7 +27,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/translate/**").access("hasRole('USER') or hasRole('DBA') or hasRole('ADMIN')")
                 .antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
                 .and().formLogin()
-                .and().exceptionHandling().accessDeniedPage("/Access_Denied");
+                    .loginPage("/loginPage").failureUrl("/login?error")
+                .usernameParameter("username").passwordParameter("password")
+                .successHandler(new LoginSuccessHandler())
+                .and()
+                    .logout()
+                    .logoutSuccessUrl("/home")
+                .and()
+                    .exceptionHandling().accessDeniedPage("/Access_Denied");
 
     }
 }

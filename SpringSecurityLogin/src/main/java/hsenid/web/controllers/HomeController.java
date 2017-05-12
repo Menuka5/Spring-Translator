@@ -1,4 +1,4 @@
-package hsenid.web;
+package hsenid.web.controllers;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,11 @@ public class HomeController {
         logger.info("Home Test");
         model.addAttribute("greeting", "Hi, Welcome to mysite. ");
         return "welcome";
+    }
+
+    @RequestMapping(value="/loginPage")
+    public String login() {
+        return "login";
     }
 
     @RequestMapping(value = "/admin", method = RequestMethod.GET)
@@ -45,14 +51,14 @@ public class HomeController {
         return "userPage";
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            new SecurityContextLogoutHandler().logout(request, response, auth);
-        }
-        return "welcome";
-    }
+//    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+//    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth != null) {
+//            new SecurityContextLogoutHandler().logout(request, response, auth);
+//        }
+//        return "welcome";
+//    }
 
     @RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
     public String accessDeniedPage(ModelMap model) {

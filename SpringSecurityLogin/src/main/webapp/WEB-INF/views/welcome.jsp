@@ -8,6 +8,6 @@
 <body>
 Greeting : ${greeting}
 This is a welcome page.<br>
-<a href="<c:url value="/login" />">Login</a>
+<a href="<c:url value="/loginPage" />">Login</a>
 </body>
 </html>
