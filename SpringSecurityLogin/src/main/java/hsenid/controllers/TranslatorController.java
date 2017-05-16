@@ -49,6 +49,8 @@ public class TranslatorController {
         String toLanguage = request.getParameter("toLang");
         String textToTranslate = request.getParameter("text");
 
+        logger.info(fromLanguage+toLanguage+textToTranslate);
+
         JSONObject reply = (JSONObject) parser.parse(connectorHttpClient.getTranslate(textToTranslate, fromLanguage, toLanguage));
 
         return reply;

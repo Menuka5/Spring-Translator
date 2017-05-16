@@ -11,6 +11,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -19,16 +21,18 @@ import java.io.InputStreamReader;
 
 
 @Service
+@PropertySource("classpath:config.properties")
 public class ConnectorHttpClient implements IConnector {
 
     private static final Logger logger = LogManager.getLogger(ConnectorHttpClient.class);
+
+    @Value("${alllanguageurl}")
+    private String UrlForGetAllLanguages;
 
     @Autowired
     ModifiedUrlGenerator modifiedUrlGenerator;
 
     public JSONObject getAllLanguagesList() throws IOException, ParseException {
-
-        String UrlForGetAllLanguages = "https://translate.yandex.net/api/v1.5/tr.json/getLangs?ui=en&key=trnsl.1.1.20160607T111835Z.f64d4276fb712ae3.ed0f150b6046b34df73301472d5e576d32fe3c8b";
 
         CloseableHttpClient client = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost(UrlForGetAllLanguages);

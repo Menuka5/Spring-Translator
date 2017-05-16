@@ -2,18 +2,18 @@ package hsenid.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 @Service
+@PropertySource("classpath:config.properties")
 public class ModifiedUrlGenerator {
     private static final Logger logger = LogManager.getLogger(ModifiedUrlGenerator.class);
 
-    /**
-     * This class replace the spaces of given string with %20 (space character in html)
-     *
-     * @param x This is the original string from translate.jsp which we want to translate
-     * @return It return the modified string.
-     */
+    @Value("${urlWithKey}")
+    private String urlWithKey;
+
     public String modifiedStr(String x) {
 
         StringBuilder test = new StringBuilder();
@@ -32,10 +32,10 @@ public class ModifiedUrlGenerator {
     }
 
     public String modifiedUrl(String fromText, String from, String to) {
-        String urlWithKey = "https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20160607T111835Z.f64d4276fb712ae3.ed0f150b6046b34df73301472d5e576d32fe3c8b";
+
 
         StringBuilder apiCall = new StringBuilder();
-
+    logger.info(urlWithKey);
         apiCall.append(urlWithKey);
         apiCall.append("&text=");
         apiCall.append(this.modifiedStr(fromText));
