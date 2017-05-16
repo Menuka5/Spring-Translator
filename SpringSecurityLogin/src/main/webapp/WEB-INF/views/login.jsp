@@ -10,7 +10,7 @@
     <p>Invalid username / password</p>
 </c:if>
 <c:url var="loginUrl" value="/login"/>
-<form action="/login" method="post">
+<form name="f" action="/login" method="POST">
     <p><label for="username">User:</label></p>
     <input type="text" id="username" name="username"/>
 
@@ -20,6 +20,8 @@
     <div>
         <input name="submit" type="submit"/>
     </div>
+    <input type="hidden" name="${_csrf.parameterName}"
+           value="${_csrf.token}" />
 </form>
 </body>
 </html>

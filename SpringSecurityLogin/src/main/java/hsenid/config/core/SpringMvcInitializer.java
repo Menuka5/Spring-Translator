@@ -1,12 +1,13 @@
-package hsenid.config;
+package hsenid.config.core;
 
-
+import hsenid.config.AppConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{WebConfig.class};
+        return new Class[] { AppConfig.class };
     }
 
     @Override
@@ -16,6 +17,7 @@ public class SpringMvcInitializer extends AbstractAnnotationConfigDispatcherServ
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[] { "/" };
     }
+
 }

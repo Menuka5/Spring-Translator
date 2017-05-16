@@ -1,4 +1,4 @@
-package hsenid.web.controllers;
+package hsenid.controllers;
 
 import hsenid.services.ConnectorHttpClient;
 import hsenid.services.ConnectorRestTemplate;
