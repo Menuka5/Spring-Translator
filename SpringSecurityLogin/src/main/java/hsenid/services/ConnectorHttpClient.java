@@ -1,6 +1,7 @@
 package hsenid.services;
 
 import hsenid.interfaces.IConnector;
+import hsenid.models.JsonStore;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -32,29 +33,56 @@ public class ConnectorHttpClient implements IConnector {
     @Autowired
     ModifiedUrlGenerator modifiedUrlGenerator;
 
-    public JSONObject getAllLanguagesList() throws IOException, ParseException {
+    @Autowired
+    JsonStore jsonStore;
+
+    @Autowired
+    ExceptionCloser exceptionCloser;
+
+    public JSONObject getAllLanguagesList() {
 
         CloseableHttpClient client = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost(UrlForGetAllLanguages);
-        CloseableHttpResponse response = client.execute(request);
-        InputStream input = response.getEntity().getContent();
+        InputStream input = null;
+        CloseableHttpResponse response = null;
 
-        JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(input, "UTF-8"));
+        try {
+            response = client.execute(request);
+            input = response.getEntity().getContent();
 
-        return (JSONObject) jsonObject.get("langs");
+            JSONParser jsonParser = new JSONParser();
+            jsonStore.setJsonObject((JSONObject)jsonParser.parse(new InputStreamReader(input, "UTF-8")));
+        } catch (IOException | ParseException e) {
+            logger.error(e);
+        } finally {
+            exceptionCloser.closeException(input);
+            exceptionCloser.closeException(response);
+        }
+
+        return (JSONObject) jsonStore.getJsonObject().get("langs");
     }
 
-    public String getTranslate(String textToTranslate, String fromLanguage, String toLanguage) throws IOException, ParseException {
+    public String getTranslate(String textToTranslate, String fromLanguage, String toLanguage) {
 
         CloseableHttpClient client = HttpClientBuilder.create().build();
         HttpPost request = new HttpPost(modifiedUrlGenerator.modifiedUrl(textToTranslate, fromLanguage, toLanguage));
-        CloseableHttpResponse response = client.execute(request);
-        InputStream input = response.getEntity().getContent();
+        InputStream input = null;
+        CloseableHttpResponse response = null;
 
-        JSONParser jsonParser = new JSONParser();
-        JSONObject jsonObject = (JSONObject)jsonParser.parse(new InputStreamReader(input, "UTF-8"));
+        try {
+            response = client.execute(request);
+            input = response.getEntity().getContent();
 
-        return jsonObject.toString();
+            JSONParser jsonParser = new JSONParser();
+            jsonStore.setJsonObject((JSONObject)jsonParser.parse(new InputStreamReader(input, "UTF-8")));
+
+        } catch (IOException | ParseException e) {
+            logger.error(e);
+        } finally {
+            exceptionCloser.closeException(input);
+            exceptionCloser.closeException(response);
+        }
+
+        return jsonStore.getJsonObject().toString();
     }
 }

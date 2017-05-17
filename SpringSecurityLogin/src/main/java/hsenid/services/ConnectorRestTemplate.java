@@ -1,6 +1,7 @@
 package hsenid.services;
 
 import hsenid.interfaces.IConnector;
+import hsenid.models.JsonStore;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -15,8 +16,10 @@ public class ConnectorRestTemplate implements IConnector {
 
     private static final Logger logger = LogManager.getLogger(ConnectorRestTemplate.class);
 
-    static String test;
-    static JSONObject sendLanguageList;
+    @Autowired
+    JsonStore jsonStore;
+
+
     static String sendTranslated;
     RestTemplate restTemplate = new RestTemplate();
     JSONParser parser = new JSONParser();
@@ -33,23 +36,23 @@ public class ConnectorRestTemplate implements IConnector {
 
         try {
 
-            JSONObject json = (JSONObject) parser.parse(getAllLanguagesList);
-            sendLanguageList = (JSONObject) parser.parse(json.get("langs").toString());
+
+            jsonStore.setJsonObject((JSONObject) parser.parse(getAllLanguagesList));
+
+//            sendLanguageList = (JSONObject) parser.parse(json.get("langs").toString());
 
         } catch (ParseException e) {
             logger.error(e.getMessage());
         }
 
-
-        return sendLanguageList;
+        return (JSONObject) jsonStore.getJsonObject().get("langs");
 
     }
 
     public String getTranslate(String textToTranslate, String fromLanguage, String toLanguage){
 
-        sendTranslated = restTemplate.getForObject(modifiedUrlGenerator.modifiedUrl(textToTranslate, fromLanguage, toLanguage), String.class);
+        jsonStore.setString(restTemplate.getForObject(modifiedUrlGenerator.modifiedUrl(textToTranslate, fromLanguage, toLanguage), String.class));
 
-        logger.info(sendTranslated.toString());
-        return sendTranslated;
+        return jsonStore.getString();
     }
 }

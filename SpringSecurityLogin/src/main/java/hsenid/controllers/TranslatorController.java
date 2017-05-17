@@ -37,8 +37,8 @@ public class TranslatorController {
 
     @RequestMapping(value = "/sendAllLanguages", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject getTranslated() throws IOException, ParseException {
-        return connectorHttpClient.getAllLanguagesList();
+    public JSONObject getTranslated() {
+        return connectorRestTemplate.getAllLanguagesList();
     }
 
     @RequestMapping(value = "/getTranslate", method = RequestMethod.GET)
@@ -51,7 +51,7 @@ public class TranslatorController {
 
         logger.info(fromLanguage+toLanguage+textToTranslate);
 
-        JSONObject reply = (JSONObject) parser.parse(connectorHttpClient.getTranslate(textToTranslate, fromLanguage, toLanguage));
+        JSONObject reply = (JSONObject) parser.parse(connectorRestTemplate.getTranslate(textToTranslate, fromLanguage, toLanguage));
 
         return reply;
     }

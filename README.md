@@ -17,12 +17,12 @@ The project created using following sdk's and tools.
 Here we Have Used In memory authentication 
 
 **_Users_**
-  - username - bill, password - abc123
+  - username - bill, password - abc
   - username - admin, password - root123
-  - username - dba, password - root123
   
 **_User privileges_**
   - Every user can use translate
   - USER can't access ADMIN
   - After logout you can't access Translate 
   
+
