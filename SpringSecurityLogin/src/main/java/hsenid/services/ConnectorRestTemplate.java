@@ -8,26 +8,25 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-@Service
 public class ConnectorRestTemplate implements IConnector {
 
     private static final Logger logger = LogManager.getLogger(ConnectorRestTemplate.class);
 
-    @Autowired
-    JsonStore jsonStore;
-
-
-    static String sendTranslated;
-    RestTemplate restTemplate = new RestTemplate();
-    JSONParser parser = new JSONParser();
-
-    String UrlForGetAllLanguages = "https://translate.yandex.net/api/v1.5/tr.json/getLangs?ui=en&key=trnsl.1.1.20160607T111835Z.f64d4276fb712ae3.ed0f150b6046b34df73301472d5e576d32fe3c8b";
 
     @Autowired
     ModifiedUrlGenerator modifiedUrlGenerator;
+
+    JsonStore jsonStore = new JsonStore();
+
+
+    PropertyCaller propertyCaller = new PropertyCaller();
+
+    RestTemplate restTemplate = new RestTemplate();
+    JSONParser parser = new JSONParser();
+    String UrlForGetAllLanguages = propertyCaller.sendProperty("alllanguageurl");
+
 
 
     public JSONObject getAllLanguagesList() {
@@ -36,10 +35,7 @@ public class ConnectorRestTemplate implements IConnector {
 
         try {
 
-
             jsonStore.setJsonObject((JSONObject) parser.parse(getAllLanguagesList));
-
-//            sendLanguageList = (JSONObject) parser.parse(json.get("langs").toString());
 
         } catch (ParseException e) {
             logger.error(e.getMessage());

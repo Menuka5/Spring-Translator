@@ -14,6 +14,7 @@
             <PatternLayout>
                 <Pattern>${format}</Pattern>
             </PatternLayout>
+
             <Policies>
                 <!-- Roll over the file next day. -->
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
@@ -56,6 +57,5 @@
             <AppenderRef ref="Spring-security-error-log" level="error"/>
             <AppenderRef ref="Spring-security-console-log" level="info"/>
         </logger>
-
     </Loggers>
 </Configuration>

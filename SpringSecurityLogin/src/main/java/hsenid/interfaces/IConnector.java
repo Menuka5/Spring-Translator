@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public interface IConnector {
 
-    public JSONObject getAllLanguagesList() throws IOException, SAXException, ParserConfigurationException, ParseException;
-    public String  getTranslate(String textToTranslate, String fromLanguage, String toLanguage) throws IOException, ParseException;
+    public JSONObject getAllLanguagesList();
+    public String  getTranslate(String textToTranslate, String fromLanguage, String toLanguage);
 }
 
