@@ -1,6 +1,6 @@
 package hsenid.config;
 
-import hsenid.services.ConnectorHttpClient;
+import hsenid.services.apicallers.ConnectorHttpClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.security.core.Authentication;

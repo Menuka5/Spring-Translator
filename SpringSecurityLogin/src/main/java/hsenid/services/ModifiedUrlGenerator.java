@@ -2,7 +2,6 @@ package hsenid.services;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +10,8 @@ import org.springframework.stereotype.Service;
 public class ModifiedUrlGenerator {
     private static final Logger logger = LogManager.getLogger(ModifiedUrlGenerator.class);
 
-    @Value("${urlWithKey}")
-    private String urlWithKey;
+    PropertyCaller propertyCaller = new PropertyCaller();
+    private String urlWithKey = propertyCaller.sendProperty("urlWithKey");
 
     public String modifiedStr(String x) {
 
@@ -33,9 +32,8 @@ public class ModifiedUrlGenerator {
 
     public String modifiedUrl(String fromText, String from, String to) {
 
-
         StringBuilder apiCall = new StringBuilder();
-    logger.info(urlWithKey);
+
         apiCall.append(urlWithKey);
         apiCall.append("&text=");
         apiCall.append(this.modifiedStr(fromText));

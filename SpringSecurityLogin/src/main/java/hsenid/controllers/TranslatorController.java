@@ -1,9 +1,6 @@
 package hsenid.controllers;
 
-import hsenid.interfaces.IConnector;
 import hsenid.models.JsonStore;
-import hsenid.services.ConnectorHttpClient;
-import hsenid.services.ConnectorRestTemplate;
 import hsenid.services.ConnectorS;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,11 +13,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.xml.sax.SAXException;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 
 @Controller
 public class TranslatorController {
@@ -28,10 +22,8 @@ public class TranslatorController {
 
     JSONParser parser = new JSONParser();
 
-
-    ConnectorS connectorS = new ConnectorS();
-
-
+    @Autowired
+    ConnectorS connectorS;
 
     @RequestMapping(value = "/translate", method = RequestMethod.GET)
     public String sendTranslateView(ModelMap model) {
@@ -41,8 +33,6 @@ public class TranslatorController {
     @RequestMapping(value = "/sendAllLanguages", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject getTranslated(){
-
-//        logger.info(connectorS.getiConnector().getAllLanguagesList());
         return connectorS.getiConnector().getAllLanguagesList();
     }
 
@@ -56,9 +46,6 @@ public class TranslatorController {
         String toLanguage = request.getParameter("toLang");
         String textToTranslate = request.getParameter("text");
 
-//        logger.info(fromLanguage+toLanguage+textToTranslate);
-
-        JSONObject reply = null;
         try {
             jsonStore.setJsonObject((JSONObject) parser.parse(connectorS.getiConnector().getTranslate(textToTranslate, fromLanguage, toLanguage)));
         } catch (ParseException e) {

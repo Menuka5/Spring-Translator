@@ -2,11 +2,6 @@ package hsenid.interfaces;
 
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
 
 public interface IConnector {
 
